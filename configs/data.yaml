@@ -1,0 +1,22 @@
+# Data locations and preprocessing settings (owner: Sonu)
+paths:
+  train: data/train                 # 80 training trips
+  student_test: data/student_test   # 10 student-testing trips
+  evaluator_test: data/evaluator_test  # 10 reserved trips, only given at evaluation time
+  cache: cache                      # feature tables (git-ignored)
+  results: results                  # csv / json experiment outputs
+  figures: figures                  # plots and folium maps
+
+network:
+  sample_spacing_m: 5.0             # spacing of points sampled along arcs for the KD-tree
+
+candidates:
+  radius: 50.0                      # metres; 99% of points are < 16 m from their reference arc
+  k: 8                              # max candidates per observation
+  fallback_radius: 150.0            # used only when nothing is within `radius`
+  fallback_k: 4
+
+labels:
+  max_dist: 50.0                    # = candidate radius; route arcs further away are not used as a label
+
+seed: 42
