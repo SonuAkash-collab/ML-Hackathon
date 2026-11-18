@@ -1,0 +1,8 @@
+# API / deployment settings (owner: Sahana)
+api:
+  host: 0.0.0.0               # listen on all interfaces so Laptop 2 can reach Laptop 1
+  port: 8000
+  eval_dir: data/evaluator_test   # folder with the 10 reserved trips (override with PATHSNAP_EVAL_DIR)
+  artifacts: artifacts
+  max_gps_points_in_response: 4000   # GPS points sent to the UI are thinned above this
+  log_file: logs/api.log

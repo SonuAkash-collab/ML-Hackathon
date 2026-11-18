@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PathSnap · Evaluation</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">◉</span>
+      <div>
+        <h1>PathSnap</h1>
+        <p>GPS map-matching · classifier + HMM/Viterbi</p>
+      </div>
+    </div>
+    <div class="api">
+      <label for="apiUrl">API (Laptop 1)</label>
+      <input id="apiUrl" type="text" spellcheck="false" placeholder="http://192.168.x.x:8000">
+      <button id="connectBtn">Connect</button>
+      <span id="apiStatus" class="status idle">not connected</span>
+    </div>
+  </header>
+
+  <main>
+    <aside>
+      <section>
+        <h2>Evaluation trips</h2>
+        <p class="hint">Select a trip. The UI sends only its ID; the API runs the full pipeline.</p>
+        <div id="tripList" class="trips"><p class="muted">Connect to the API to load trips.</p></div>
+      </section>
+
+      <section id="resultCard" class="hidden">
+        <h2>Result · trip <span id="resTrip"></span></h2>
+        <div class="big">
+          <div>
+            <span class="label">HMM accuracy</span>
+            <span id="mAccHmm" class="value accent">–</span>
+          </div>
+          <div>
+            <span class="label">Classifier only</span>
+            <span id="mAccClf" class="value">–</span>
+          </div>
+        </div>
+        <table class="metrics">
+          <tbody id="metricRows"></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Request log</h2>
+        <ol id="log" class="log"></ol>
+      </section>
+    </aside>
+
+    <div class="mapwrap">
+      <div id="map"></div>
+      <div id="busy" class="busy hidden"><div class="spinner"></div><span>Running pipeline on Laptop 1…</span></div>
+    </div>
+  </main>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
