@@ -1,0 +1,9 @@
+# Bayesian hyperparameter optimisation (owner: Ayush)
+optuna:
+  model: lgbm                 # the model chosen from the comparison in results/models/comparison.csv
+  n_trials: 30
+  timeout_s: 3600             # stop early if the search runs longer than this
+  cv_folds: 3                 # GroupKFold over training trips
+  train_stride: 3             # same thinning as the model comparison
+  objective: top1_accuracy    # maximised (mean over folds)
+  seed: 42
