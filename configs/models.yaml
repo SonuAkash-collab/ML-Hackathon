@@ -1,0 +1,8 @@
+# Model comparison settings (owner: Purushotham)
+models:
+  candidates: [logreg, gnb, knn, tree, rf, hgb, lgbm, mlp]
+  cv_folds: 5                 # GroupKFold over the 80 training trips (a trip never spans folds)
+  train_stride: 3             # keep every 3rd labelled observation for fitting: 1 Hz points are
+                              # near-duplicates, thinning cuts autocorrelation and training time
+  primary_metric: top1_accuracy   # observation-level top-1 accuracy (see README / report 3.1)
+  selected: lgbm              # chosen after reading results/models/comparison.csv
