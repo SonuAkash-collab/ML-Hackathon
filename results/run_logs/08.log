@@ -1,0 +1,51 @@
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000000: classifier 0.9541 -> HMM 0.9696  continuity 0.872 -> 0.978  route F1 0.942  (0.6s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000007: classifier 0.9845 -> HMM 0.9742  continuity 1.000 -> 1.000  route F1 0.980  (0.3s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000009: classifier 0.8913 -> HMM 0.9199  continuity 0.945 -> 0.982  route F1 0.925  (0.6s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000040: classifier 0.9339 -> HMM 0.9419  continuity 0.979 -> 0.994  route F1 0.978  (0.8s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000052: classifier 0.9771 -> HMM 1.0000  continuity 0.951 -> 1.000  route F1 0.989  (0.3s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000056: classifier 0.9288 -> HMM 0.9532  continuity 0.873 -> 0.993  route F1 0.966  (3.0s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000065: classifier 0.8776 -> HMM 0.8880  continuity 0.943 -> 0.986  route F1 0.871  (0.7s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000076: classifier 0.9293 -> HMM 0.9697  continuity 0.906 -> 0.985  route F1 0.932  (2.1s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000077: classifier 0.7880 -> HMM 0.8141  continuity 0.989 -> 0.995  route F1 0.913  (2.7s)
+C:\Users\akash\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+00000091: classifier 0.9165 -> HMM 0.9462  continuity 0.890 -> 0.973  route F1 0.987  (0.7s)
+{
+  "pointwise_accuracy_classifier": 0.9040924057910417,
+  "pointwise_accuracy_hmm": 0.923796581821983,
+  "route_continuity_classifier": 0.9348492573843794,
+  "route_continuity_hmm": 0.9885713588341879,
+  "route_f1_classifier": 0.9017612086498883,
+  "route_f1_hmm": 0.9482971607098547,
+  "route_precision_hmm": 0.9108846694335127,
+  "route_recall_hmm": 0.9922522176097516,
+  "candidate_miss_rate": 0.0028223488214080333,
+  "trips_improved_by_hmm": 9,
+  "trips_worse_with_hmm": 1,
+  "mean_seconds_per_trip": 1.1747451300001557,
+  "hmm_params": {
+    "beta": 10.0,
+    "emission_weight": 0.5,
+    "prob_floor": 0.0001,
+    "uturn_penalty": 8.0,
+    "gap_seconds": 120.0
+  }
+}

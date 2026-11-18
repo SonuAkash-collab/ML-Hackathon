@@ -1,0 +1,29 @@
+       feature                      group  gain_share
+dist_minus_min                   geometry      0.2923
+head_diff_wide                    heading      0.2516
+      win_rank context (neighbour points)      0.1093
+    dist_ratio                   geometry      0.1027
+ cos_head_wide                    heading      0.0558
+     move_wide                 kinematics      0.0487
+    arc_length                   topology      0.0305
+       outside                   geometry      0.0241
+             t                   geometry      0.0123
+ win_dist_mean context (neighbour points)      0.0115
+  win_dist_max context (neighbour points)      0.0077
+   has_reverse                   topology      0.0076
+     head_diff                    heading      0.0075
+   out_deg_end                   topology      0.0063
+     head_rank                    heading      0.0062
+  in_deg_start                   topology      0.0060
+         speed                 kinematics      0.0054
+     dist_rank                   geometry      0.0048
+       n_cands                   geometry      0.0046
+          dist                   geometry      0.0041
+       dt_prev                 kinematics      0.0004
+       dt_next                 kinematics      0.0003
+      expanded                   topology      0.0000
+without geometry                     top-1 0.8517 (-0.0406)
+without heading                      top-1 0.5776 (-0.3147)
+without context (neighbour points)   top-1 0.8841 (-0.0081)
+without kinematics                   top-1 0.8905 (-0.0018)
+without topology                     top-1 0.8917 (-0.0005)

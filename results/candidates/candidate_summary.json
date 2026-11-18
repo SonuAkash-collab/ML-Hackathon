@@ -1,0 +1,30 @@
+{
+  "config": {
+    "radius": 50.0,
+    "k": 8,
+    "fallback_radius": 150.0,
+    "fallback_k": 4
+  },
+  "train": {
+    "trips": 80,
+    "rows": 1156038,
+    "observations": 208417,
+    "labelled_observations": 183867,
+    "positive_rate": 0.1579818310470763,
+    "cands_per_obs": 5.555925083984947,
+    "candidate_miss_rate": 0.006711372894537903,
+    "nearest_arc_top1": 0.5597905007423845,
+    "obs_without_candidates": 344
+  },
+  "student_test": {
+    "trips": 10,
+    "rows": 113648,
+    "observations": 19160,
+    "labelled_observations": 19133,
+    "positive_rate": 0.1678780092918485,
+    "cands_per_obs": 5.93152400835073,
+    "candidate_miss_rate": 0.0028223488214080333,
+    "nearest_arc_top1": 0.5448701196884963,
+    "obs_without_candidates": 0
+  }
+}

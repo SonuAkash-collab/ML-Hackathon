@@ -1,0 +1,116 @@
+{
+  "student_test": {
+    "n_trips": 10,
+    "n_obs_total": 19160,
+    "obs_per_trip": {
+      "count": 10.0,
+      "mean": 1916.0,
+      "std": 1335.4,
+      "min": 262.0,
+      "25%": 917.8,
+      "50%": 1420.0,
+      "75%": 2872.0,
+      "max": 3958.0
+    },
+    "missing_or_invalid_rows": 0,
+    "duplicate_timestamps": 0,
+    "unsorted_trips": 0,
+    "frac_dt_exactly_1s": 0.9862140992167102,
+    "dt_percentiles": {
+      "50": 1.0,
+      "90": 1.0,
+      "99": 2.0,
+      "99.9": 11.0
+    },
+    "trips_with_gap_gt60s": [
+      "00000065"
+    ],
+    "trips_with_gap_gt1h": [],
+    "nodes_per_trip_median": 6596.5,
+    "arcs_per_trip_median": 13145.0,
+    "frac_two_way_arcs_mean": 0.926940290876092,
+    "trips_with_disconnected_network": 10,
+    "isolated_nodes_total": 0,
+    "route_connected_frac_min": 0.9973190348525469,
+    "route_invalid_ids_total": 0,
+    "frac_obs_labelled": 0.9985908141962422,
+    "gps_to_reference_m": {
+      "50": 5.257536560040511,
+      "90": 13.390831968500727,
+      "95": 16.73888240905054,
+      "99": 27.06756148740829,
+      "100": 47.341972249288574
+    },
+    "max_projection_rel_error": 0.0034530484157475273,
+    "n_utm_zones": 9
+  },
+  "train": {
+    "n_trips": 80,
+    "n_obs_total": 208417,
+    "obs_per_trip": {
+      "count": 80.0,
+      "mean": 2605.2,
+      "std": 3312.3,
+      "min": 361.0,
+      "25%": 945.8,
+      "50%": 1529.0,
+      "75%": 2792.8,
+      "max": 19313.0
+    },
+    "missing_or_invalid_rows": 0,
+    "duplicate_timestamps": 0,
+    "unsorted_trips": 0,
+    "frac_dt_exactly_1s": 0.9650134157638826,
+    "dt_percentiles": {
+      "50": 1.0,
+      "90": 1.0,
+      "99": 3.0,
+      "99.9": 20.0
+    },
+    "trips_with_gap_gt60s": [
+      "00000002",
+      "00000006",
+      "00000011",
+      "00000014",
+      "00000021",
+      "00000024",
+      "00000028",
+      "00000041",
+      "00000042",
+      "00000043",
+      "00000044",
+      "00000054",
+      "00000055",
+      "00000069",
+      "00000070",
+      "00000078",
+      "00000081",
+      "00000084",
+      "00000085",
+      "00000088",
+      "00000089",
+      "00000090"
+    ],
+    "trips_with_gap_gt1h": [
+      "00000078",
+      "00000090"
+    ],
+    "nodes_per_trip_median": 9608.0,
+    "arcs_per_trip_median": 19526.5,
+    "frac_two_way_arcs_mean": 0.9216733541064445,
+    "trips_with_disconnected_network": 79,
+    "isolated_nodes_total": 0,
+    "route_connected_frac_min": 0.9813084112149533,
+    "route_invalid_ids_total": 0,
+    "frac_obs_labelled": 0.8822073055460927,
+    "gps_to_reference_m": {
+      "50": 4.920611857334228,
+      "90": 13.182142790977988,
+      "95": 17.355645002693958,
+      "99": 33.71710066782505,
+      "100": 49.99216406493816
+    },
+    "max_projection_rel_error": 0.005535710818638545,
+    "n_utm_zones": 25
+  }
+}

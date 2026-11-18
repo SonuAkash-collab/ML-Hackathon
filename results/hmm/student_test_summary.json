@@ -1,0 +1,21 @@
+{
+  "pointwise_accuracy_classifier": 0.9040924057910417,
+  "pointwise_accuracy_hmm": 0.923796581821983,
+  "route_continuity_classifier": 0.9348492573843794,
+  "route_continuity_hmm": 0.9885713588341879,
+  "route_f1_classifier": 0.9017612086498883,
+  "route_f1_hmm": 0.9482971607098547,
+  "route_precision_hmm": 0.9108846694335127,
+  "route_recall_hmm": 0.9922522176097516,
+  "candidate_miss_rate": 0.0028223488214080333,
+  "trips_improved_by_hmm": 9,
+  "trips_worse_with_hmm": 1,
+  "mean_seconds_per_trip": 1.1747451300001557,
+  "hmm_params": {
+    "beta": 10.0,
+    "emission_weight": 0.5,
+    "prob_floor": 0.0001,
+    "uturn_penalty": 8.0,
+    "gap_seconds": 120.0
+  }
+}
