@@ -19,6 +19,18 @@ matched arc per GPS point + continuous route           pathsnap/inference.py
 FastAPI (Laptop 1)  ⇄  browser UI (Laptop 2)            api/, ui/
 ```
 
+## Results
+
+Share of GPS observations matched to the correct road on the 10 student-test trips:
+
+| Method | Top-1 accuracy |
+|---|---|
+| Nearest road (baseline) | 54.49% |
+| Best single model: LightGBM classifier | 90.42% |
+| **Final: tuned LightGBM + HMM/Viterbi** | **92.38%** |
+
+The full 8-model comparison is in `results/models/comparison.csv`. The method and all results are in `report/PathSnap_Report.pdf`.
+
 ## Team
 
 | Member | GitHub | Owns |
@@ -30,50 +42,6 @@ FastAPI (Laptop 1)  ⇄  browser UI (Laptop 2)            api/, ui/
 
 See `TEAM_SPLIT.md` for what each person should be able to explain in the viva.
 
-## Where things are (local working copy)
-
-The team's local working folder is `pathsnap_review/`. Open this folder in VS Code. Its `.venv/` is already set up here, so don't rename or move the folder. The sibling `ml-hack/` folder is the GitHub clone. Leave it as it is.
-
-| What | Path |
-|---|---|
-| Source code | `pathsnap/` (package), `scripts/` (01–10, `run_all.py`), `api/`, `ui/`, `configs/` |
-| Raw data (git-ignored) | `data/train/` (80 trips), `data/student_test/` (10 trips) |
-| Prepared features (git-ignored) | `cache/features_train.parquet`, `cache/features_student_test.parquet` |
-| Saved student-test probabilities | `cache/probs_student_test.parquet` (from the local LR + tree runs) |
-| Local results and logs | `results/models/`, `results/candidates/`, `logs/` |
-| Reference run (8 models, Optuna, HMM, saved model) | `reference_outputs/` (unchanged layout; see its `README.md`) |
-| Review 1 archive | `archive/review1/` (summary PDF, workbook, top-5 plots, feature analysis, hand-off guides) |
-| Report | `report/REPORT.md` (source), `report/PathSnap_Report_DRAFT_1.pdf` (full draft) |
-
-## After Review 1
-
-Review 1 is finished. Its material is in `archive/review1/`. Start there with `REVIEW1_SUMMARY.pdf`.
-
-**Model runs with local evidence (run on this laptop, `--no-cv`):**
-
-| Model | Log | Student-test top-1 | Reference run |
-|---|---|---|---|
-| Logistic Regression | `logs/04_logreg_nocv.log` | 0.8833 | 0.8833 |
-| Decision Tree | `logs/04_tree_nocv.log` | 0.8932 | 0.8930 |
-
-The results are in `results/models/comparison.csv` and `details.json`. The student-test probabilities are in `cache/probs_student_test.parquet`. These local runs skipped cross-validation, so they have no `cv_*` numbers and no `cv_folds.csv`. The feature tables in `cache/` come from the local `02_build_features.py` run (`logs/02_build_features.log`, `results/candidates/`). They are byte-identical to the shared tables from the team-review hand-off.
-
-**Work that has only reference evidence (`reference_outputs/`, not re-run locally):**
-
-- 8-model comparison with 5-fold group CV: `reference_outputs/results/models/` and `figures/models/`
-- Optuna tuning of LightGBM (30 trials, best CV top-1 0.894, student-test top-1 0.9071): `reference_outputs/results/optuna/`, including `study.db` and `trials.csv`
-- HMM decoder tuning and evaluation (accuracy 0.925, route continuity 0.989, route F1 0.950): `reference_outputs/results/hmm/` and `figures/hmm/`
-- Saved tuned model: `reference_outputs/artifacts/model.joblib` and `metadata.json`
-- Feature-selection evidence: `archive/review1/feature_analysis/` (code: `scripts/10_feature_analysis.py`)
-
-**Still to verify as a team:**
-
-1. Run cross-validation for LR and the decision tree (without `--no-cv`), and run LightGBM, RF, GNB, kNN, HGB and MLP locally. Then compare the results with `reference_outputs/results/models/comparison.csv`.
-2. Re-run steps 6–9 (Optuna, decoder tuning, HMM evaluation, error analysis) on a team laptop to create our own `artifacts/` and `results/optuna|hmm/`. Until then, `artifacts/` does not exist and the API and steps 7–9 have no model. For a demo only, you can run `$env:PATHSNAP_ARTIFACTS="reference_outputs/artifacts"`.
-3. Run `scripts/10_feature_analysis.py` locally if the report needs feature numbers from our own run.
-4. Update the numbers in `report/REPORT.md` from our own `results/`, and replace the two TODO screenshots.
-5. Before evaluation day, go through the checklist in `archive/review1/handoff/COMMIT_GUIDE.md`.
-
 ## Repository layout
 
 ```
@@ -83,12 +51,12 @@ pathsnap/     the Python package (io, geo, network, labels, candidates, features
 scripts/      01_eda … 09_error_analysis, 10_feature_analysis, run_all.py
 api/          FastAPI backend
 ui/           evaluator UI (static HTML + Leaflet) and a tiny server
-artifacts/    model.joblib + metadata.json (final model, features, HMM params; created by steps 6–7)
+artifacts/    final tuned LightGBM (model.joblib) + HMM settings (metadata.json); created by steps 6–7
 results/      CSV / JSON outputs of every experiment
+  team/                    each member's two model results (results/team/<member>/results.csv)
+  models/comparison.csv    combined 8-model comparison table
 figures/      PNG plots and folium HTML maps
-report/       technical report source
-reference_outputs/  outputs of the reference run, kept only to check our own runs
-archive/review1/    Review 1 material (read-only)
+report/       final report: REPORT.md (source) + PathSnap_Report.pdf
 ```
 
 ## 1. Setup (both laptops)
@@ -119,7 +87,8 @@ The evaluator-testing trips are not used anywhere in training, tuning or model s
 ## 3. Reproduce the experiments (Laptop 1)
 
 ```bash
-python scripts/run_all.py          # all 8 steps, about 30–40 min on a 2-core laptop
+python scripts/run_all.py          # steps 1–9 (01_eda … 09_error_analysis), about 30–40 min on a 2-core laptop
+python scripts/10_feature_analysis.py   # feature analysis, run separately (not part of run_all.py)
 ```
 
 or step by step:
