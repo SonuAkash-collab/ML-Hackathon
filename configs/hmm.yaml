@@ -1,0 +1,13 @@
+# HMM / Viterbi decoder (owner: Ayush). These are the starting values;
+# scripts/07_tune_decoder.py writes the tuned values to artifacts/metadata.json.
+hmm:
+  beta: 10.0                  # metres; scale of |route distance - straight-line distance|
+  emission_weight: 1.0        # weight of log classifier probability
+  prob_floor: 0.0001          # minimum normalised probability (avoids log(0))
+  uturn_penalty: 2.0          # nats charged for switching to the reverse arc
+  gap_seconds: 60.0           # time gap that cuts the Viterbi chain
+
+lattice:
+  max_gap_seconds: 120.0      # transitions are only computed for gaps up to this
+  max_speed: 50.0             # m/s, bounds the shortest-path search
+  backward_tol: 10.0          # metres of backward GPS jitter tolerated on one arc
