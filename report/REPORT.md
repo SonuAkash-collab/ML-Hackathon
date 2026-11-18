@@ -123,18 +123,18 @@ Each teammate trained their two models on their own laptop with the same code, d
 
 ## 3.1 Overall comparison
 
-| Model | Family | Trained by | CV macro F1 (mean ± std) | CV top-1 | Student-test top-1 | Route continuity | Student-test macro F1 | Student-test log loss |
+| Model (trained by) | Algorithm family | Key configuration | CV macro F1 (mean ± std) | Top-1 accuracy (student test) | Route continuity | Student-test macro F1 | Log loss (student test) | Inference time (ms / 1,000 obs) |
 |---|---|---|---|---|---|---|---|---|
-| **LightGBM** | Boosting | Purushotham | 0.9349 ± 0.0097 | **0.8945** | **0.9042** | 0.9367 | **0.9400** | **0.0849** |
-| Random Forest | Bagging ensemble | Ayush | 0.9352 ± 0.0093 | 0.8938 | 0.8942 | 0.9289 | 0.9348 | 0.0879 |
-| HistGradientBoosting | Boosting | Purushotham | 0.9331 ± 0.0102 | 0.8919 | 0.8957 | 0.9241 | 0.9341 | 0.0914 |
-| MLP | Neural network | Sahana | 0.9308 ± 0.0099 | 0.8893 | 0.8839 | 0.9330 | 0.9280 | 0.0962 |
-| Decision Tree | Tree | Sonu | 0.9300 ± 0.0111 | 0.8885 | 0.8932 | 0.9255 | 0.9317 | 0.1085 |
-| Logistic Regression | Linear | Sonu | 0.9282 ± 0.0102 | 0.8872 | 0.8833 | 0.9357 | 0.9254 | 0.1151 |
-| KNN | Instance-based | Ayush | 0.9281 ± 0.0090 | 0.8842 | 0.8808 | 0.9181 | 0.9251 | 0.1502 |
-| Gaussian NB | Probabilistic | Sahana | 0.9056 ± 0.0119 | 0.8776 | 0.8752 | 0.9053 | 0.8963 | 0.5530 |
+| **LightGBM** (Purushotham) | Boosting | 600 rounds, lr 0.05, 63 leaves, early stopping | 0.9349 ± 0.0097 | **0.9042** | 0.9367 | **0.9400** | **0.0849** | 112.3 |
+| Random Forest (Ayush) | Bagging ensemble | 150 trees, depth 18, min leaf 5 | 0.9352 ± 0.0093 | 0.8942 | 0.9289 | 0.9348 | 0.0879 | 15.0 |
+| HistGradientBoosting (Purushotham) | Boosting | lr 0.1, ≤ 300 iterations, early stopping | 0.9331 ± 0.0102 | 0.8957 | 0.9241 | 0.9341 | 0.0914 | 8.4 |
+| MLP (Sahana) | Neural network | (64, 32) ReLU, Adam, early stopping | 0.9308 ± 0.0099 | 0.8839 | 0.9330 | 0.9280 | 0.0962 | 6.5 |
+| Decision Tree (Sonu) | Tree | depth 12, min leaf 50 | 0.9300 ± 0.0111 | 0.8932 | 0.9255 | 0.9317 | 0.1085 | 0.8 |
+| Logistic Regression (Sonu) | Linear | L2, C = 1, standardised | 0.9282 ± 0.0102 | 0.8833 | 0.9357 | 0.9254 | 0.1151 | 1.0 |
+| KNN (Ayush) | Instance-based | k = 25, distance-weighted, ≤ 150k rows | 0.9281 ± 0.0090 | 0.8808 | 0.9181 | 0.9251 | 0.1502 | 626.9 |
+| Gaussian NB (Sahana) | Probabilistic | var_smoothing 1e-9 | 0.9056 ± 0.0119 | 0.8752 | 0.9053 | 0.8963 | 0.5530 | 6.1 |
 
-Route continuity = share of consecutive distinct predicted arcs that are connected within 3 arcs (classifier-only predictions, student test).
+Top-1 accuracy is observation-level. Route continuity = share of consecutive distinct predicted arcs that are connected within 3 arcs (classifier-only predictions, student test). Inference time was measured on each owner's laptop, so it compares speed only roughly across models. 5-fold CV top-1: LightGBM 0.8945, Random Forest 0.8938, HistGradientBoosting 0.8919, MLP 0.8893, Decision Tree 0.8885, Logistic Regression 0.8872, KNN 0.8842, Gaussian NB 0.8776. Source: `results/models/comparison.csv`.
 
 ![Top-1 accuracy of the 8 models, from results/team/*/results.csv](img/team_top1.png){width=85%}
 
@@ -143,6 +143,8 @@ All eight models beat the nearest-arc baseline (54.5%) by more than 32 points, s
 **Selection: LightGBM.** It is best on CV top-1, student-test top-1, student-test macro F1 and log loss. Its fold-to-fold spread (± 0.019 top-1) matches every other model's; the spread comes from which trips land in a fold (fold 2 is hardest for every model), not from instability. Its low log loss matters because the HMM consumes the probabilities, and inference takes about 0.1 s per 1,000 observations. Random Forest is nearly as accurate in CV but less well calibrated and slower to train; KNN is too slow at inference for the API.
 
 The plots below come from one full 8-model run on Sonu's laptop with the same code. Its numbers agree with the table to within 0.3 points.
+
+![](img/models_cv_macro_f1.png){width=49%} ![](img/models_student_test_top1_f1.png){width=49%}
 
 ![](img/models_cv_top1_folds.png){width=49%} ![](img/models_log_loss.png){width=49%}
 
@@ -205,12 +207,12 @@ Code: `scripts/06_bayes_opt.py`; outputs in `results/optuna/` (including the SQL
 3. **Search.** Optuna TPE sampler (seed 42, 8 random start-up trials) with a median pruner.
 4. **Trials.** 30 trials: 20 completed and 10 pruned early; about 3.4 minutes.
 5. **Best values** (trial 29): learning_rate 0.0343, num_leaves 81, min_child_samples 57, subsample 0.835, colsample_bytree 0.836, reg_lambda 0.059, reg_alpha 2.95; early stopping chose 439 rounds. The most important hyperparameters (fANOVA) were learning_rate (0.59), num_leaves (0.13), reg_alpha (0.13) and subsample (0.10).
-6. **Did tuning help?** Only marginally. Same folds and partitions:
+6. **Did tuning help?** Only marginally. Same folds and partitions, both measured on the same laptop (`results/optuna/tuned_vs_untuned.csv`):
 
-| | CV macro F1 | CV top-1 | CV log loss | Student-test top-1 | Student-test macro F1 | Student-test log loss |
-|---|---|---|---|---|---|---|
-| LightGBM, untuned | 0.9334 | 0.8926 | 0.0942 | 0.9042 | 0.9400 | 0.0849 |
-| LightGBM, tuned | 0.9340 | 0.8942 | 0.0938 | 0.9041 | 0.9403 | 0.0843 |
+| | CV macro F1 | CV top-1 | CV log loss | Student-test top-1 | Student-test macro F1 | Student-test log loss | Inference time (ms / 1,000 obs) |
+|---|---|---|---|---|---|---|---|
+| LightGBM, untuned | 0.9334 | 0.8926 | 0.0942 | 0.9042 | 0.9400 | 0.0849 | 21.6 |
+| LightGBM, tuned | 0.9340 | 0.8942 | 0.0938 | 0.9041 | 0.9403 | 0.0843 | 24.0 |
 
 Tuning improved CV top-1 by 0.16 points and log loss slightly, but not student-test top-1. The defaults were already near-optimal, and the remaining errors (direction ambiguity when the vehicle is stopped, section 5.2) are not something a classifier's hyperparameters can fix; that is the HMM's job. The tuned model was kept because it is better on the training-only objective, and it is the model exported to `artifacts/model.joblib`. Ayush's independent run of the same search produced the same best parameters.
 

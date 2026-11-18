@@ -1,0 +1,24 @@
+feature,group,gain_share
+dist_minus_min,geometry,0.2922703506900956
+head_diff_wide,heading,0.251611856850295
+win_rank,context (neighbour points),0.10929372949812129
+dist_ratio,geometry,0.10274602745830473
+cos_head_wide,heading,0.05582930696532366
+move_wide,kinematics,0.04868854771254683
+arc_length,topology,0.0305496768640441
+outside,geometry,0.024118144318734394
+t,geometry,0.012254040567177004
+win_dist_mean,context (neighbour points),0.011540531784761863
+win_dist_max,context (neighbour points),0.00771457720326548
+has_reverse,topology,0.007646064891189285
+head_diff,heading,0.007467367786635316
+out_deg_end,topology,0.006336666302083443
+head_rank,heading,0.0062242402583001545
+in_deg_start,topology,0.0060228032264662435
+speed,kinematics,0.0054202447828387255
+dist_rank,geometry,0.0047875493021676116
+n_cands,geometry,0.004623679190613012
+dist,geometry,0.004138977550309509
+dt_prev,kinematics,0.0003752304670414079
+dt_next,kinematics,0.00034038632968530616
+expanded,topology,0.0
