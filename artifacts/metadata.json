@@ -1,0 +1,61 @@
+{
+  "model_name": "lgbm",
+  "model_variant": "tuned",
+  "params": {
+    "learning_rate": 0.03427141175724942,
+    "num_leaves": 81,
+    "min_child_samples": 57,
+    "subsample": 0.8350683405481809,
+    "colsample_bytree": 0.8363613716989856,
+    "reg_lambda": 0.059164614982040765,
+    "reg_alpha": 2.949804014500948,
+    "n_estimators": 1500
+  },
+  "features": [
+    "dist",
+    "dist_rank",
+    "dist_minus_min",
+    "dist_ratio",
+    "n_cands",
+    "head_diff",
+    "head_diff_wide",
+    "cos_head_wide",
+    "head_rank",
+    "win_dist_mean",
+    "win_dist_max",
+    "win_rank",
+    "t",
+    "outside",
+    "speed",
+    "dt_prev",
+    "dt_next",
+    "move_wide",
+    "arc_length",
+    "out_deg_end",
+    "in_deg_start",
+    "has_reverse",
+    "expanded"
+  ],
+  "candidates": {
+    "radius": 50.0,
+    "k": 8,
+    "fallback_radius": 150.0,
+    "fallback_k": 4
+  },
+  "sample_spacing_m": 5.0,
+  "label_max_dist": 50.0,
+  "hmm": {
+    "beta": 10.0,
+    "emission_weight": 0.5,
+    "prob_floor": 0.0001,
+    "uturn_penalty": 8.0,
+    "gap_seconds": 120.0
+  },
+  "lattice": {
+    "max_gap_seconds": 120.0,
+    "max_speed": 50.0,
+    "backward_tol": 10.0
+  },
+  "trained_on": "80 training trips (labelled observations, every 3-th)",
+  "created_utc": "2026-11-18T11:45:24+00:00"
+}
